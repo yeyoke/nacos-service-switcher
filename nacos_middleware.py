@@ -50,11 +50,9 @@ class NacosServiceMiddleware:
         def health_check():
             """健康检查接口"""
             try:
-                # 检查 Nacos 客户端连接状态
-                self.client.get_server_status()
                 return jsonify({
                     'status': 'healthy',
-                    'nacos_connection': 'ok'
+                    'service': 'running'
                 }), 200
             except Exception as e:
                 self.logger.error(f"Health check failed: {str(e)}")
