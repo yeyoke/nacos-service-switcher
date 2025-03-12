@@ -1,8 +1,8 @@
 version: '3.8'
-
 services:
   nacos-service-switcher:
     build: .
+    image: nacos-service-switcher:latest
     ports:
       - "5000:5000"
     environment:
