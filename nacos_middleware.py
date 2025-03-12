@@ -46,6 +46,23 @@ class NacosServiceMiddleware:
     def setup_routes(self):
         """设置 API 路由"""
         
+        @self.app.route('/health', methods=['GET'])
+        def health_check():
+            """健康检查接口"""
+            try:
+                # 检查 Nacos 客户端连接状态
+                self.client.get_server_status()
+                return jsonify({
+                    'status': 'healthy',
+                    'nacos_connection': 'ok'
+                }), 200
+            except Exception as e:
+                self.logger.error(f"Health check failed: {str(e)}")
+                return jsonify({
+                    'status': 'unhealthy',
+                    'error': str(e)
+                }), 503
+
         @self.app.route('/service/<service_name>/<ip>/<int:port>/up', methods=['GET'])
         def service_up(service_name, ip, port):
             """上线服务"""

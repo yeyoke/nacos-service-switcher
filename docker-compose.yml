@@ -10,7 +10,7 @@ services:
       - NACOS_USERNAME=your-username
       - NACOS_PASSWORD=your-password
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 30s
       timeout: 3s
       retries: 3

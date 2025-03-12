@@ -1,5 +1,5 @@
 # 使用 Python 3.8 作为基础镜像
-FROM python:3.8-slim
+FROM python:3.8
 
 # 设置工作目录
 WORKDIR /app
@@ -22,7 +22,7 @@ EXPOSE 5000
 
 # 设置健康检查
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD curl -f http://localhost:5000/ || exit 1
+  CMD curl -f http://localhost:5000/health || exit 1
 
 # 启动服务
 CMD ["python", "main.py"] 
