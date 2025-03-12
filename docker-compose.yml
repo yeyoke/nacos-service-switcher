@@ -2,6 +2,7 @@ services:
   nacos-service-switcher:
     build: .
     image: nacos-service-switcher:latest
+    container_name: nacos-service-switcher
     ports:
       - "5000:5000"
     environment:
@@ -15,3 +16,9 @@ services:
       timeout: 3s
       retries: 3
     restart: unless-stopped
+    networks:
+      - bridge
+
+networks:
+  bridge:
+    external: true
