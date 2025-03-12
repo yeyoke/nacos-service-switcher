@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  nacos-service-switcher:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - NACOS_SERVER=http://your-nacos-server:8848
+      - NACOS_NAMESPACE=your-namespace
+      - NACOS_USERNAME=your-username
+      - NACOS_PASSWORD=your-password
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    restart: unless-stopped
